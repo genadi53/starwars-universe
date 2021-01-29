@@ -5,6 +5,6 @@ export default class StarWarsUniverse {
     }
 
     async init(){
-       return await fetch('https://swapi.dev/api/');
+       return await fetch('https://swapi.booost.bg/api/');
     }
 }

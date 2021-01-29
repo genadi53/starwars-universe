@@ -40,11 +40,25 @@ export default class Application extends EventEmitter {
     const response = await this.data.universe.init();
     const data = await response.json();
 
+    let count = 0;
+
     for(let [name, entityData] of Object.entries(data)){
-      const entity = new Entity(name, entityData);
+      const entity = new Entity(name, {entityData});
       console.log(entity);
-      this.data.universe.entities.push(entity);
       
+      const _response = await fetch(entityData);
+      const _data = await _response.json();
+
+      this.data.universe.entities.push(entity);
+
+      //console.log(_data.count);
+      this.data.universe.entities[count].data.count = _data.count;
+      console.log(this.data.universe.entities[count].data.count);
+      count++;
+
+      //this.data.universe.entities[0].data.count
+      //this.data.universe.entities[0].data.count=true;
+      //console.log(this.data.universe.entities[0].data.hasOwnProperty('count'));
     }
 
     this.data.count = this.data.universe.entities.length;
