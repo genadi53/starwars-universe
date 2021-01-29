@@ -42,11 +42,13 @@ export default class Application extends EventEmitter {
 
     for(let [name, entityData] of Object.entries(data)){
       const entity = new Entity(name, entityData);
-      //console.log(entity);
+      console.log(entity);
       this.data.universe.entities.push(entity);
+      
     }
 
-
+    this.data.count = this.data.universe.entities.length;
+    console.log(this.data.universe.entities);
 
     this.emit(Application.events.APP_READY);
   }
